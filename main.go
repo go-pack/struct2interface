@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	structName     = flag.String("s", "", "结构名词")
+	structName     = flag.String("s", "", "结构名称")
 	isOverWrite    = flag.Bool("m", false, "是否覆盖")
 	output         = flag.String("o", "/tmp/xx.go", "输出位置")
 	apiMap         = make(map[string]bool)
