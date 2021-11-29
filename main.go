@@ -114,13 +114,19 @@ func main() {
 	isAppend := false
 	newDecl := make([]dst.Decl, 0)
 	for _, v := range f.Decls {
-		if _, ok := v.(*dst.GenDecl); ok {
+		if vv, ok := v.(*dst.GenDecl); ok {
 			if v.(*dst.GenDecl).Tok == token.TYPE {
 				// newDecl = append(newDecl, v)
 				if !isAppend {
-					newDecl = append(newDecl, v, apiFace)
-					isAppend = true
-					continue
+					if val, ok := vv.Specs[0].(*dst.TypeSpec); ok {
+						if val.Name.Name == forStruct {
+							newDecl = append(newDecl, v, apiFace)
+							isAppend = true
+							continue
+
+						}
+					}
+
 				}
 
 			}
